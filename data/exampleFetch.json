@@ -1,0 +1,43 @@
+[
+  {
+    "station_id": 243,
+    "trains": [
+      {
+        "direction": "N",
+        "route_id": "J",
+        "stop_id": "M11",
+        "time": 208.94760394096375
+      },
+      {
+        "direction": "N",
+        "route_id": "M",
+        "stop_id": "M11",
+        "time": 308.9480199813843
+      },
+      {
+        "direction": "S",
+        "route_id": "M",
+        "stop_id": "M11",
+        "time": 660.9480168819427
+      },
+      {
+        "direction": "S",
+        "route_id": "J",
+        "stop_id": "M11",
+        "time": 988.9476289749146
+      },
+      {
+        "direction": "N",
+        "route_id": "J",
+        "stop_id": "M11",
+        "time": 1500.947494983673
+      },
+      {
+        "direction": "N",
+        "route_id": "M",
+        "stop_id": "M11",
+        "time": 1500.947988986969
+      }
+    ]
+  }
+]
