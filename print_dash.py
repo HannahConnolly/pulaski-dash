@@ -7,7 +7,7 @@ use_local = True
 class PrintDash:
 
     def __init__(self):
-      print('pulaski dash')
+      print('print dash')
     
     def format_row(self, route_name, departures):
         output = [route_name]
@@ -24,6 +24,4 @@ class PrintDash:
         table.append([])
         table.append(self.format_row('M -> Manhattan', train_dict['manhattan_M']))
         table.append(self.format_row('M -> Queens', train_dict['queens_M']))
-        print(tabulate(table))
-
         return table
