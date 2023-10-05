@@ -16,8 +16,6 @@ class PrintDash:
         return output
 
     def format_trains_to_table(self, train_dict):
-        # table = [["Sun",696000,1989100000],["Earth",6371,5973.6],["Moon",1737,73.5],["Mars",3390,641.85]]
-        # print(train_dict)
         table = []
         table.append(self.format_row('J -> Manhattan', train_dict['manhattan_J']))
         table.append(self.format_row('J -> Queens', train_dict['queens_J']))
