@@ -9,11 +9,12 @@ class MtaApi:
         'queens_M': [] # S
     }
 
-    station_id = 0
+    station_id = None
 
     def __init__(self):
         print('init api')
-        self.station_id = self.get_station()
+        if self.station_id == None:
+            self.station_id = self.get_station()
 
     def parseTrainTime(self, train_time):
         return int(train_time / 60)
@@ -36,8 +37,7 @@ class MtaApi:
 
         data = None
         if not use_local_data:
-            api = MtaApi()
-            data = api.get_data()
+            self.get_data()
             print(data)
         else:
             f = open('data/exampleFetch.json')
