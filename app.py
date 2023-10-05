@@ -3,7 +3,7 @@ from print_dash import PrintDash
 import json
 from tabulate import tabulate
 
-use_local = True
+use_local = False
 
 
 class PulaskiDash:
