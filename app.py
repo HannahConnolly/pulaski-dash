@@ -20,7 +20,7 @@ t = time.localtime()
 colors = Fore.BLACK + Back.WHITE
 while(True):
 
-  if t.tm_hour > 6 or t.tm_hour < 19:
+  if t.tm_hour < 6 or t.tm_hour > 19:
     colors = Fore.WHITE + Back.BLACK
   else:
     colors = Fore.BLACK + Back.WHITE
