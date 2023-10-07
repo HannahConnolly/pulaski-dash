@@ -20,10 +20,10 @@ t = time.localtime()
 colors = Fore.BLACK + Back.WHITE
 while(True):
 
-  if t.tm_hour < 6 or t.tm_hour > 19:
-    colors = Fore.WHITE + Back.BLACK
-  else:
+  if t.tm_hour > 6 and t.tm_hour < 19:
     colors = Fore.BLACK + Back.WHITE
+  else:
+    colors = Fore.WHITE + Back.BLACK
   train_board = train_getter.get_trains(use_local)
 
   x = 0
@@ -31,7 +31,7 @@ while(True):
     print(colors + '\n')
     x+=1
   current_time = time.strftime("%I:%M %p")
-  print(colors + " " + current_time)
+  print(colors + current_time)
   print(colors + tabulate(print_dash.format_trains_to_table(train_board)))
   time.sleep(60)
 
