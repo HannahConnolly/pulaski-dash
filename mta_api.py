@@ -48,10 +48,14 @@ class MtaApi:
             f = open('data/exampleFetch.json')
             data = json.load(f)
 
-        for train in data[0]['trains']:
-            self.parseTrain(train)
-        # print(self.trainBoard)
-        return self.trainBoard
+        try:
+            for train in data[0]['trains']: 
+                self.parseTrain(train)
+            # print(self.trainBoard)
+        except TypeError:
+            return "failed to recieve trains from API"
+        finally:
+            return self.trainBoard
 
     def formatted_print(obj):
         text = json.dumps(obj, sort_keys=True, indent=4)
