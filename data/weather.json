@@ -1,0 +1,23 @@
+{
+  "latitude": 40.710335,
+  "longitude": -73.99307,
+  "generationtime_ms": 0.08606910705566406,
+  "utc_offset_seconds": -14400,
+  "timezone": "America/New_York",
+  "timezone_abbreviation": "EDT",
+  "elevation": 51.0,
+  "daily_units": {
+    "time": "iso8601",
+    "weathercode": "wmo code",
+    "temperature_2m_max": "°F",
+    "temperature_2m_min": "°F",
+    "precipitation_probability_max": "%"
+  },
+  "daily": {
+    "time": ["2023-10-09"],
+    "weathercode": [3],
+    "temperature_2m_max": [60.4],
+    "temperature_2m_min": [45.2],
+    "precipitation_probability_max": [0]
+  }
+}

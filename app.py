@@ -6,6 +6,8 @@ import time
 
 from colorama import Fore, Back, Style
 
+from weather import Weather
+
 # print(Fore.RED + 'some red text')
 # print(Back.GREEN + 'and with a green background')
 # print(Style.DIM + 'and in dim text')
@@ -16,6 +18,7 @@ use_local = False
 
 train_getter = MtaApi()
 print_dash = PrintDash()
+weather = Weather()
 t = time.localtime()
 colors = Fore.BLACK + Back.WHITE
 while(True):
@@ -32,6 +35,7 @@ while(True):
     x+=1
   current_time = time.strftime("%I:%M %p")
   print(colors + current_time)
+  print(colors + weather.get_weather_printout())
   print(colors + tabulate(print_dash.format_trains_to_table(train_board)))
   time.sleep(60)
 
