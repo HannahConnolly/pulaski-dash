@@ -15,7 +15,7 @@ class Weather:
     
     def get_weather_printout(self):
         self.get_data()
-        return f"High: {self.weather['high']}°  Low: {self.weather['low']}°  Precipitation: {self.weather['rain']}%"
+        return f"High: {self.weather['high']}°  Low: {self.weather['low']}°  Rain: {self.weather['rain']}%"
 
     def get_data(self):
         api = "https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=America%2FNew_York&forecast_days=1"
