@@ -36,7 +36,6 @@ class MtaApi:
 
     def get_trains(self, use_local_data):
 
-
         self.resetTrainBoard()
         # print('getting train data...')
 
@@ -62,12 +61,14 @@ class MtaApi:
         print(text)
 
     def get_station(self):
-        station_id = 0
         api = "http://localhost:5000/api/stations"
         response = requests.get(f"{api}").json()
-        for station in response:
-            if station["name"] == "Myrtle Av":
-                return station["station_id"]
+        if response.status_code = 200:
+            for station in response:
+                if station["name"] == "Myrtle Av":
+                    return station["station_id"]
+        else:
+            return 999
 
     def get_data(self):
         api = f"http://localhost:5000/api/train_times/{self.station_id}"
