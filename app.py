@@ -3,6 +3,8 @@ from print_dash import PrintDash
 import json
 from tabulate import tabulate
 import time
+from datetime import date
+
 
 from colorama import Fore, Back, Style
 
@@ -19,10 +21,11 @@ use_local = False
 train_getter = MtaApi()
 print_dash = PrintDash()
 weather = Weather()
-t = time.localtime()
 colors = Fore.BLACK + Back.WHITE
 while(True):
 
+  t = time.localtime()
+  today = date.today()
   if t.tm_hour > 6 and t.tm_hour < 19:
     colors = Fore.BLACK + Back.WHITE
   else:
@@ -34,7 +37,9 @@ while(True):
     print(colors + '\n')
     x+=1
   current_time = time.strftime("%I:%M %p")
+  current_date = today.strftime("%d/%m/%Y")
   print(colors + current_time)
+  print(colors + current_date)
   print(colors + weather.get_weather_printout())
   print(colors + tabulate(print_dash.format_trains_to_table(train_board)))
   time.sleep(60)

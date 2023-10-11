@@ -62,9 +62,9 @@ class MtaApi:
 
     def get_station(self):
         api = "http://localhost:5000/api/stations"
-        response = requests.get(f"{api}").json()
-        if response.status_code = 200:
-            for station in response:
+        response = requests.get(f"{api}")
+        if response.status_code == 200:
+            for station in response.json():
                 if station["name"] == "Myrtle Av":
                     return station["station_id"]
         else:
