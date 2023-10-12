@@ -61,22 +61,28 @@ class MtaApi:
         print(text)
 
     def get_station(self):
-        api = "http://localhost:5000/api/stations"
-        response = requests.get(f"{api}")
-        if response.status_code == 200:
-            for station in response.json():
-                if station["name"] == "Myrtle Av":
-                    return station["station_id"]
-        else:
-            return 999
+        out = 999
+        try:
+            api = "http://localhost:5000/api/stations"
+            response = requests.get(f"{api}")
+            if response.status_code == 200:
+                for station in response.json():
+                    if station["name"] == "Myrtle Av":
+                        out = station["station_id"]
+        finally:
+            return out
 
     def get_data(self):
-        api = f"http://localhost:5000/api/train_times/{self.station_id}"
-        response = requests.get(f"{api}")
-        if response.status_code == 200:
-            # print("sucessfully fetched the data")
-            # print(type(response.json()))
-            return response.json()
-        else:
-            print(
-                f"Hello person, there's a {response.status_code} error with your request")
+        out = None
+        try:
+            api = f"http://localhost:5000/api/train_times/{self.station_id}"
+            response = requests.get(f"{api}")
+            if response.status_code == 200:
+                # print("sucessfully fetched the data")
+                # print(type(response.json()))
+                out = response.json()
+            else:
+                print(
+                    f"Hello person, there's a {response.status_code} error with your request")
+        finally:
+            return out
