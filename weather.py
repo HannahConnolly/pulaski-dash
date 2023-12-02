@@ -17,7 +17,7 @@ class Weather:
     def get_weather_printout(self):
         self.get_data()
         # return f"Current: {self.weather['current_temp']}° | High: {self.weather['high_temp']}° | Low: {self.weather['low_temp']}° \nRain: {self.weather['rain_today']}%"
-        return f"Current: {self.weather['current_temp']}° | High: {self.weather['high_temp']}° | Low: {self.weather['low_temp']}°\nRain: {self.weather['hourly_rain']}"
+        return f"Current: {self.weather['current_temp']}° |  High: {self.weather['high_temp']}° |  Low: {self.weather['low_temp']}°\nRain: {self.weather['hourly_rain']}"
 
     def get_data(self):
         try:
@@ -25,12 +25,12 @@ class Weather:
             response = requests.get(f"{api}")
             if response.status_code == 200:
                 res = response.json()
-                self.weather["high_temp"] = res["daily"]["temperature_2m_max"][0]
-                self.weather["low_temp"] = res["daily"]["temperature_2m_min"][0]
-                self.weather["rain_today"] = res["daily"][
-                    "precipitation_probability_max"
-                ][0]
-                self.weather["current_temp"] = res["current"]["temperature_2m"]
+                self.weather["high_temp"] = int(res["daily"]["temperature_2m_max"][0])
+                self.weather["low_temp"] = int(res["daily"]["temperature_2m_min"][0])
+                self.weather["rain_today"] = int(
+                    res["daily"]["precipitation_probability_max"][0]
+                )
+                self.weather["current_temp"] = int(res["current"]["temperature_2m"])
                 self.parse_rain(res)
             else:
                 print(

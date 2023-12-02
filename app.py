@@ -27,11 +27,17 @@ colors = Fore.BLACK + Back.WHITE
 
 spinner = itertools.cycle(["-", "/", "|", "\\"])
 busy = True
-# while busy:
-#     sys.stdout.write(next(spinner))  # write the next character
-#     sys.stdout.flush()                      # flush stdout buffer (actual character display)
-#     sys.stdout.write('\b')                 # erase the last written char
-#     sleep(1)
+
+
+def sleep_spinner():
+    i = 0
+    while i < 60:
+        sys.stdout.write(next(spinner))  # write the next character
+        sys.stdout.flush()  # flush stdout buffer (actual character display)
+        sys.stdout.write("\b")  # erase the last written char
+        time.sleep(1)
+        i += 1
+
 
 while True:
     sys.stdout.flush()
@@ -54,4 +60,5 @@ while True:
     print(colors + current_time + "  |  " + current_date)
     print(colors + weather.get_weather_printout())
     print(colors + tabulate(print_dash.format_trains_to_table(train_board)))
-    time.sleep(60)
+    # time.sleep(60)
+    sleep_spinner()
