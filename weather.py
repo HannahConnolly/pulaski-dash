@@ -17,7 +17,7 @@ class Weather:
     def get_weather_printout(self):
         self.get_data()
         temp_line = f"Current: {self.weather['current_temp']}° |  High: {self.weather['high_temp']}° |  Low: {self.weather['low_temp']}°"
-        rain_divider = "Hourly Rain . . . . . . . . . . . . . . . . . . "
+        rain_divider = "Hourly Rain . . . . . . . . . . . . . ."
         rain = f"{self.weather['hourly_rain']}"
         # return f"Current: {self.weather['current_temp']}° | High: {self.weather['high_temp']}° | Low: {self.weather['low_temp']}° \nRain: {self.weather['rain_today']}%"
         return temp_line + "\n" + rain_divider + "\n" + rain
