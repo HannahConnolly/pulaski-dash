@@ -54,9 +54,7 @@ while True:
         print(colors + "\n")
         x += 1
     current_time = time.strftime("%I:%M %p")
-    current_date = today.strftime("%d/%m/%Y")
-    # print(colors + current_time)
-    # print(colors + current_date)
+    current_date = today.strftime("%m / %d / %Y")
     print(colors + current_time + "  |  " + current_date)
     print(colors + weather.get_weather_printout())
     print(colors + tabulate(print_dash.format_trains_to_table(train_board)))
