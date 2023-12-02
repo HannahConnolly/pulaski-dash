@@ -17,7 +17,7 @@ class Weather:
     def get_weather_printout(self):
         self.get_data()
         # return f"Current: {self.weather['current_temp']}° | High: {self.weather['high_temp']}° | Low: {self.weather['low_temp']}° \nRain: {self.weather['rain_today']}%"
-        return f"Current: {self.weather['current_temp']}°  |  High: {self.weather['high_temp']}°  |  Low: {self.weather['low_temp']}°\nRain: {self.weather['hourly_rain']}"
+        return f"Current: {self.weather['current_temp']}° | High: {self.weather['high_temp']}° | Low: {self.weather['low_temp']}°\nRain: {self.weather['hourly_rain']}"
 
     def get_data(self):
         try:
@@ -40,7 +40,7 @@ class Weather:
             return
 
     # rain_percent_ascii_key = ["  ", "░░", "▒▒", "▓▓"]
-    rain_percent_ascii_key = ["  ", "__", "--", "▔▔"]
+    rain_percent_ascii_key = ["  ", "__", "--", "^^"]
 
     def parse_rain(self, res):
         rain = ""
