@@ -21,17 +21,14 @@ class Weather:
 
     def get_data(self):
         try:
-            api = "https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=temperature_2m,precipitation&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&forecast_days=1"
+            api = f"https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=73.9496&current=temperature_2m&hourly=precipitation_probability&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&forecast_days=1"
             response = requests.get(f"{api}")
             if response.status_code == 200:
                 res = response.json()
                 self.weather["high_temp"] = int(res["daily"]["temperature_2m_max"][0])
                 self.weather["low_temp"] = int(res["daily"]["temperature_2m_min"][0])
-                self.weather["rain_today"] = int(
-                    res["daily"]["precipitation_probability_max"][0]
-                )
                 self.weather["current_temp"] = int(res["current"]["temperature_2m"])
-                self.parse_rain(res)
+                self.parse_rain(res["hourly"]["precipitation_probability"])
             else:
                 print(
                     f"Hello person, there's a {response.status_code} error with your request"
@@ -42,16 +39,21 @@ class Weather:
     # rain_percent_ascii_key = ["  ", "░░", "▒▒", "▓▓"]
     rain_percent_ascii_key = ["  ", "__", "--", "^^"]
 
-    def parse_rain(self, res):
-        rain = ""
-        for rain_hour in res["hourly"]["precipitation_probability"]:
+    def parse_rain(self, hourly_precipitation):
+        rain = " "
+        rain_count = 0
+        for rain_hour in hourly_precipitation:
             if rain_hour == 0:
                 rain += self.rain_percent_ascii_key[0]
-            elif rain_hour < 30:
+            elif rain_hour < 15:
                 rain += self.rain_percent_ascii_key[1]
-            elif rain_hour < 60:
+            elif rain_hour < 50:
                 rain += self.rain_percent_ascii_key[2]
             else:
                 rain += self.rain_percent_ascii_key[3]
+            rain_count += rain_hour
 
-        self.weather["hourly_rain"] = rain
+        if rain_count == 0:
+            self.weather["hourly_rain"] = "no rain : ^ ) "
+        else:
+            self.weather["hourly_rain"] = rain
