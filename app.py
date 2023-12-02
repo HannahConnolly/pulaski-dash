@@ -3,6 +3,8 @@ from print_dash import PrintDash
 import json
 from tabulate import tabulate
 import time
+import sys
+import itertools
 from datetime import date
 
 
@@ -23,7 +25,16 @@ print_dash = PrintDash()
 weather = Weather()
 colors = Fore.BLACK + Back.WHITE
 
+spinner = itertools.cycle(["-", "/", "|", "\\"])
+busy = True
+# while busy:
+#     sys.stdout.write(next(spinner))  # write the next character
+#     sys.stdout.flush()                      # flush stdout buffer (actual character display)
+#     sys.stdout.write('\b')                 # erase the last written char
+#     sleep(1)
+
 while True:
+    sys.stdout.flush()
     t = time.localtime()
     today = date.today()
     if t.tm_hour > 6 and t.tm_hour < 19:
