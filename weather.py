@@ -12,9 +12,12 @@ class Weather:
             "rain_today": "n.a",
             "current_temp": "n.a",
             "hourly_rain": "n.a",
+            "sunrise": "n.a",
+            "sunset": "n.a"
         }
 
     def get_weather_printout(self):
+        self.get_sunrise_and_sunset()
         self.get_data()
         temp_line = f"Current: {self.weather['current_temp']}° |  High: {self.weather['high_temp']}° |  Low: {self.weather['low_temp']}°"
         rain_divider = "Hourly Rain . . . . . . . . . . . . . ."
@@ -36,6 +39,19 @@ class Weather:
                 print(
                     f"Hello person, there's a {response.status_code} error with your request"
                 )
+        except Exception as e:
+            print(e)
+        finally:
+            return
+        
+    def get_sunrise_and_sunset(self):
+        try:
+            api = f"https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=-73.9496&daily=sunrise,sunset&forecast_days=1"
+            response = requests.get(f"{api}")
+            if response.status_code == 200:
+                res = response.json()
+                print(res["daily"]["sunrise"]) # test to see if returned
+                print(res["daily"]["sunset"]) # test to see if returned
         except Exception as e:
             print(e)
         finally:
