@@ -50,8 +50,14 @@ class Weather:
             response = requests.get(f"{api}")
             if response.status_code == 200:
                 res = response.json()
-                print(res["daily"]["sunrise"]) # test to see if returned
-                print(res["daily"]["sunset"]) # test to see if returned
+                print(res["daily"]["sunrise"][0]) # test to see if returned
+                print(res["daily"]["sunset"][0]) # test to see if returned
+                sunrise_raw = res["daily"]["sunrise"][0]
+                sunset_raw = res["daily"]["sunset"][0]
+                sunrise = int(sunrise_raw[slice(11, 13)] + sunrise_raw[slice(14,16)]) * 60
+                sunset = int(sunset_raw[slice(11, 13)] + sunset_raw[slice(14,16)]) * 60
+                print("Sunrise:", sunrise)
+                print("Sunset:", sunset)
         except Exception as e:
             print(e)
         finally:
