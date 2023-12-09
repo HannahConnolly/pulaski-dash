@@ -23,5 +23,5 @@
 
 My python broke, what happened?
 
- - make sure that the containerized enviroment is active `source .ven/bin/activate`
+ - make sure that the containerized enviroment is active `source .venv/bin/activate`
  - if this doesnt work. reinstall starting with `sudo rm -rf .venv` and begin at step 1

@@ -6,7 +6,7 @@ import time
 import sys
 import itertools
 from datetime import date
-
+from datetime import datetime
 
 from colorama import Fore, Back, Style
 
@@ -43,7 +43,12 @@ while True:
     sys.stdout.flush()
     t = time.localtime()
     today = date.today()
-    if t.tm_hour > 6 and t.tm_hour < 19:
+    current_time = datetime.now().time()
+    hours = current_time.hour
+    minutes = current_time.minute
+    current_time_in_minutes = hours * 60 + minutes
+    
+    if current_time_in_minutes > int(weather.get_sunrise()) and current_time_in_minutes < int(weather.get_sunset()):
         colors = Fore.BLACK + Back.WHITE
     else:
         colors = Fore.WHITE + Back.BLACK

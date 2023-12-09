@@ -12,6 +12,8 @@ class Weather:
             "rain_today": "n.a",
             "current_temp": "n.a",
             "hourly_rain": "n.a",
+            "sunrise": 0,
+            "sunset": 0
         }
 
     def get_weather_printout(self):
@@ -24,10 +26,14 @@ class Weather:
 
     def get_data(self):
         try:
-            api = f"https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=-73.9496&current=temperature_2m,precipitation&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&forecast_days=3"
+            api = f"https://api.open-meteo.com/v1/forecast?latitude=40.6501&longitude=-73.9496&current=temperature_2m,precipitation&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&daily=sunrise,sunset&timezone=America%2FNew_York&forecast_days=3"
             response = requests.get(f"{api}")
             if response.status_code == 200:
                 res = response.json()
+
+                sunset_and_sunrise = self.convert_sunrise_and_sunset(sunrise = res["daily"]["sunrise"][0], sunset = res["daily"]["sunset"][0])
+                self.weather["sunrise"] = sunset_and_sunrise["sunrise"]
+                self.weather["sunset"] = sunset_and_sunrise["sunset"]
                 self.weather["high_temp"] = int(res["daily"]["temperature_2m_max"][0])
                 self.weather["low_temp"] = int(res["daily"]["temperature_2m_min"][0])
                 self.weather["current_temp"] = int(res["current"]["temperature_2m"])
@@ -40,6 +46,22 @@ class Weather:
             print(e)
         finally:
             return
+        
+    def convert_sunrise_and_sunset(self, sunrise, sunset):
+        sunrise_raw = sunrise
+        sunset_raw = sunset
+        parsed_sunrise = (int((sunrise_raw[slice(11, 13)])) * 60 + int(sunrise_raw[slice(14,16)]))
+        parsed_sunset = (int((sunset_raw[slice(11, 13)])) *60 + int(sunset_raw[slice(14,16)]))
+        return {
+            "sunrise": parsed_sunrise,
+            "sunset": parsed_sunset
+        }
+    
+    def get_sunrise(self):
+        return self.weather["sunrise"]
+    
+    def get_sunset(self):
+        return self.weather["sunset"]
 
     # rain_percent_ascii_key = ["  ", "░░", "▒▒", "▓▓"]
     rain_percent_ascii_key = [" ", "_", "-", "^"]
